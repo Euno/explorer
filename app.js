@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require('express')
   , path = require('path')
   , bitcoinapi = require('bitcoin-node-api')
@@ -11,11 +12,62 @@ var express = require('express')
   , db = require('./lib/database')
   , locale = require('./lib/locale')
   , request = require('request');
+=======
+/*
+  Copyright (c) 2015, Iquidus Technology
+  Copyright (c) 2015, Luke Williams
+  Copyright (c) 2017, Team Swipp
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+
+  * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+  * Neither the name of Iquidus Technology nor the names of its
+    contributors may be used to endorse or promote products derived from
+    this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+var express = require('express'),
+  path = require('path'),
+  bitcoinapi = require('bitcoin-node-api'),
+  favicon = require('static-favicon'),
+  logger = require('morgan'),
+  cookieParser = require('cookie-parser'),
+  bodyParser = require('body-parser'),
+  settings = require('./lib/settings'),
+  routes = require('./routes/index'),
+  lib = require('./lib/explorer'),
+  db = require('./lib/database'),
+  locale = require('./lib/locale'),
+  request = require('request'),
+  RpcClient = require('node-json-rpc2').Client;
+>>>>>>> 052115f... Add "getmasternodes" command to the API section
 
 var app = express();
 
 // bitcoinapi
 bitcoinapi.setWalletDetails(settings.wallet);
+
+// used for extending with masternode commmands
+var client = new RpcClient(settings.wallet);
+
 if (settings.heavy != true) {
   bitcoinapi.setAccess('only', ['getinfo', 'getnetworkhashps', 'getmininginfo','getdifficulty', 'getconnectioncount',
     'getblockcount', 'getblockhash', 'getblock', 'getrawtransaction', 'getpeerinfo', 'gettxoutsetinfo']);
@@ -49,8 +101,22 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
+app.use('/api/getmasternodes', function(req, res) {
+  var mn = function(mnp) {
+    client.call({method: 'masternode', params: mnp}, function(ierr, ires) {
+      if (ierr) {
+        console.log(ierr);
+        return;
+      }
+      res.send(ires.result);
+    });
+  }
+  mn(['list', 'pubkey'])
+});
+
 app.use('/api', bitcoinapi.app);
 app.use('/', routes);
+
 app.use('/ext/getmoneysupply', function(req,res){
   lib.get_supply(function(supply){
     res.send(' '+supply);
