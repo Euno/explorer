@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  script.
+    $(document).ready(function(){
+      var ctable = $('#masternodes-table').dataTable({
+        autoWidth: true,
+        searching: false,
+        ordering: false,
+        responsive: true,
+        lengthChange: true,
+        processing: true,
+        ajax: {
+          url: '/api/getmasternodes',
+          dataSrc: function ( json ) {
+            var masternodes = [];
+
+            Object.keys(json).forEach(function(e) {
+              masternodes.push({'address': e, 'pubkey': json[e]});
+            });
+
+            return masternodes;
+          }
+        },
+        columns: [
+          { data: 'address', width: '50%' },
+          { data: 'pubkey', width: '50%' }
+        ]
+      });
+    });
+  .col-md-12(style="margin-bottom: 4%")
+    .panel.panel-default
+      .panel-heading
+        strong #{settings.locale.mn}
+      table#masternodes-table.table.table-bordered.table-striped
+        thead
+          tr
+            th.text-center #{settings.locale.net_address}
+            th.text-center #{settings.locale.mn_pubkey}
+        tbody.text-center

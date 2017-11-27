@@ -67,6 +67,7 @@
     "facebook": false,
     "googleplus": false,
     "search": true,
+    "masternodes": true,
     "movement": true,
     "network": true
   },

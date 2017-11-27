@@ -186,6 +186,11 @@ router.get('/richlist', function(req, res) {
   }
 });
 
+router.get('/masternodes', function(req, res) {
+  if (settings.display.masternodes == true ) {
+    res.render('masternodes', {active: 'masternodes'});
+  }
+});
 router.get('/movement', function(req, res) {
   res.render('movement', {active: 'movement', flaga: settings.movement.low_flag, flagb: settings.movement.high_flag, min_amount:settings.movement.min_amount});
 });
