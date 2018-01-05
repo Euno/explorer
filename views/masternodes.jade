@@ -3,7 +3,11 @@ extends layout
 block content
   script.
     $(document).ready(function(){
-      var ctable = $('#masternodes-table').dataTable({
+      var iconChecking = '<i class="mn-status fa fa-refresh fa-spin fa-fw"></i>';
+      var iconOpen = '<i class="mn-status-open fa fa-check-square"></i>';
+      var iconClosed = '<i class="mn-status-closed fa fa-exclamation-triangle"></i>';
+
+      $('#masternodes-table').dataTable({
         autoWidth: true,
         searching: false,
         ordering: false,
@@ -16,16 +20,34 @@ block content
             var masternodes = [];
 
             Object.keys(json).forEach(function(e) {
-              masternodes.push({'address': e, 'pubkey': json[e]});
+              masternodes.push({'address': e, 'pubkey': json[e], 'status': iconChecking});
             });
 
             return masternodes;
           }
         },
         columns: [
-          { data: 'address', width: '50%' },
-          { data: 'pubkey', width: '50%' }
-        ]
+          { data: 'address', width: '45%' },
+          { data: 'pubkey', width: '45%' },
+          { data: 'status', width: '10%' }
+        ],
+        initComplete: function() {
+          this.api().rows().eq(0).each(function(index) {
+            var row = this.row(index);
+            var host = row.data()['address'].split(':')[0];
+            var port = row.data()['address'].split(':')[1];
+            var destination = '/ext/ismasternodeopen/' + host + '/' + port;
+
+            $.ajax({url: destination, success: function(result) {
+              if (result === 'true') {
+                row.data()['status'] = row.data()['status'].replace(iconChecking, iconOpen);
+              } else {
+                row.data()['status'] = row.data()['status'].replace(iconChecking, iconClosed);
+              }
+              row.invalidate();
+            }});
+          });
+        }
       });
     });
   .col-md-12(style="margin-bottom: 4%")
@@ -37,4 +59,5 @@ block content
           tr
             th.text-center #{settings.locale.net_address}
             th.text-center #{settings.locale.mn_pubkey}
+            th.text-center #{settings.locale.mn_status}
         tbody.text-center

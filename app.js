@@ -56,6 +56,7 @@ var express = require('express'),
   lib = require('./lib/explorer'),
   db = require('./lib/database'),
   locale = require('./lib/locale'),
+  mn = require('./lib/masternode'),
   request = require('request'),
   RpcClient = require('node-json-rpc2').Client;
 >>>>>>> 052115f... Add "getmasternodes" command to the API section
@@ -169,6 +170,12 @@ app.use('/ext/getlasttxs/:min', function(req,res){
 app.use('/ext/connections', function(req,res){
   db.get_peers(function(peers){
     res.send({data: peers});
+  });
+});
+
+app.use('/ext/ismasternodeopen/:host/:port', function(req, res) {
+  mn.is_open(req.param('host'), req.param('port'), function(perror, pstatus) {
+    res.send(pstatus == 'open' ? 'true' : 'false');
   });
 });
 

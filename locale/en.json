@@ -78,6 +78,7 @@
 
     "mn": "Masternodes",
     "mn_pubkey": "Pubkey",
+    "mn_status": "Status",
 
     "net_connections": "Connections",
     "net_address": "Address",
