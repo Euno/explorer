@@ -33,11 +33,15 @@ mongoose.connect(dbString, function(err) {
             loop.next();
           } else {
             request({uri: 'https://geoip.nekudo.com/api/' + address, json: true}, function (error, response, geo) {
+              var geolocation = geo.country.name;
+              if (geo.city != false) {
+                geolocation = geo.city + ", " + geo.country.name;
+              }
               db.create_peer({
                 address: address,
                 protocol: body[i].version,
                 version: body[i].subver.replace('/', '').replace('/', ''),
-                country: geo.country.name
+                geolocation: geolocation
               }, function(){
                 loop.next();
               });

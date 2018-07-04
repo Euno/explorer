@@ -6,7 +6,7 @@ var PeersSchema = new Schema({
   address: { type: String, default: "" },
   protocol: { type: String, default: "" },
   version: { type: String, default: "" },
-  country: { type: String, default: "" }
+  geolocation: { type: String, default: "" }
 });
 
 module.exports = mongoose.model('Peers', PeersSchema);
