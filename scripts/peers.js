@@ -32,12 +32,12 @@ mongoose.connect(dbString, function(err) {
             // peer already exists
             loop.next();
           } else {
-            request({uri: 'http://freegeoip.net/json/' + address, json: true}, function (error, response, geo) {
+            request({uri: 'https://geoip.nekudo.com/api/' + address, json: true}, function (error, response, geo) {
               db.create_peer({
                 address: address,
                 protocol: body[i].version,
                 version: body[i].subver.replace('/', '').replace('/', ''),
-                country: geo.country_name
+                country: geo.country.name
               }, function(){
                 loop.next();
               });
