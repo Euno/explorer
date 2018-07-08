@@ -84,13 +84,8 @@
     "net_address": "Address",
     "net_protocol": "Protocol",
     "net_subversion": "Sub-version",
-<<<<<<< HEAD
-    "net_country": "Country",
-    "net_warning": "This is sub sample of the network based on wallets that have connected to this node in the last 24hours.",
-=======
     "net_location": "Location",
     "net_warning": "This is sub sample of the network based on wallets that have connected to this node in the last 48 hours.",
->>>>>>> c85c0cd... Show the city (location) of peers whenever available
 
     // api view
     "api_title": "API Documentation",

@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-var express = require('express')
-  , path = require('path')
-  , bitcoinapi = require('bitcoin-node-api')
-  , favicon = require('static-favicon')
-  , logger = require('morgan')
-  , cookieParser = require('cookie-parser')
-  , bodyParser = require('body-parser')
-  , settings = require('./lib/settings')
-  , routes = require('./routes/index')
-  , lib = require('./lib/explorer')
-  , db = require('./lib/database')
-  , locale = require('./lib/locale')
-  , request = require('request');
-=======
 /*
   Copyright (c) 2015, Iquidus Technology
   Copyright (c) 2015, Luke Williams
