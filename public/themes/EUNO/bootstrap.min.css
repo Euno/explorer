@@ -5761,3 +5761,11 @@ div.infobox > div.panel-body > strong {
 div.dataTables_wrapper{
 	overflow-x: hidden;
 }
+
+i.mn-status-open {
+    color: #0a0;
+}
+
+i.mn-status-closed {
+    color: #a00;
+}
