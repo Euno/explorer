@@ -44,7 +44,6 @@ var express = require('express'),
   mn = require('./lib/masternode'),
   request = require('request'),
   RpcClient = require('node-json-rpc2').Client;
->>>>>>> 052115f... Add "getmasternodes" command to the API section
 
 var app = express();
 
