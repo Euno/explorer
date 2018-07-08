@@ -1,16 +1,11 @@
-Iquidus Explorer - 1.6.1
+Iquidus Explorer - 1.6.1 + EUNO
 ================
 
 An open source block explorer written in node.js.
 
 ### See it in action
 
-*  [Jumbucks](http://explorer.getjumbucks.com)
-*  [Sphere](http://sphere.iquidus.io)
-*  [SAR](http://explorer.sarcoin.info)
-*  [Vanillacoin](https://blockchain.vanillacoin.net/)
-*  [Neoscoin](http://explorer.infernopool.com/)  
-*  [C2Chain](http://c2chain.info/)
+*  [Euno Blockchain Explorer](http://explorer.euno.co/)
 
 *note: If you would like your instance mentioned here contact me*
 
@@ -18,7 +13,7 @@ An open source block explorer written in node.js.
 
 *  node.js >= 0.10.28
 *  mongodb 2.6.x
-*  *coind
+*  eunod
 
 ### Create database
 
@@ -40,7 +35,7 @@ Create user with read/write access:
 
 ### Get the source
 
-    git clone https://github.com/iquidus/explorer explorer
+    git clone https://github.com/Euno/explorer explorer
 
 ### Install node modules
 
@@ -103,11 +98,6 @@ sync.js (located in scripts/) is used for updating the local databases. This scr
 Iquidus Explorer is intended to be generic so it can be used with any wallet following the usual standards. The wallet must be running with atleast the following flags
 
     -daemon -txindex
-
-### Donate
-
-    BTC: 168hdKA3fkccPtkxnX8hBrsxNubvk4udJi
-    JBS: JZp9893FMmrm1681bDuJBU7c6w11kyEY7D
 
 ### Known Issues
 
