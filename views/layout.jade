@@ -128,7 +128,7 @@ html
     .col-md-12
       .row.text-center
         .col-md-2.col-md-offset-1
-          .panel.panel-default.hidden-sm.hidden-xs
+          .panel.panel-default.hidden-sm.hidden-xs.infobox
             .panel-heading
               if settings.nethash_units == 'K'
                 strong #{settings.locale.network} (KH/s)
@@ -144,35 +144,35 @@ html
                 strong #{settings.locale.network} (H/s)
             .panel-body
               if settings.index.difficulty == 'Hybrid'
-               label#hashrate - 
+               strong#hashrate - 
                <br>
-               label#lblX1  
+	       strong
               else  
-               label#hashrate - 
+               strong#hashrate - 
         .col-md-2
-          .panel.panel-default.hidden-sm.hidden-xs
+          .panel.panel-default.hidden-sm.hidden-xs.infobox
             .panel-heading
               strong #{settings.locale.difficulty}
             .panel-body
               if settings.index.difficulty == 'Hybrid'
-               label#difficulty -
+               strong#difficulty -
                <br>
-               label#difficultyHybrid -
+               strong#difficultyHybrid -
               else
-               label#difficulty -
+               strong#difficulty -
         .col-md-2.col-sm-12
           img(src='#{settings.logo}', style='margin-top:-15px;height:128px;')
         .col-md-2
-          .panel.panel-default.hidden-sm.hidden-xs
+          .panel.panel-default.hidden-sm.hidden-xs.infobox
             .panel-heading
               strong #{settings.locale.ex_supply} (#{settings.symbol})
             .panel-body
               if settings.index.difficulty == 'Hybrid'
-               label#supply - 
+               strong#supply - 
                <br>
-               label#lblX1
+	       strong
               else
-               label#supply -  
+               strong#supply -  
         .col-md-2
           .panel.panel-default.hidden-sm.hidden-xs
             .panel-heading
