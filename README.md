@@ -46,6 +46,8 @@ Create user with read/write access:
     cp ./settings.json.template ./settings.json
 
 *Make required changes in settings.json*
+* added  "theme": "EUNO"
+
 
 ### Start Explorer
 
