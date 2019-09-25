@@ -6,6 +6,7 @@ An open source block explorer written in node.js.
 ### See it in action
 
 *  [Euno Blockchain Explorer](http://explorer.euno.co/)
+*  [Second Euno Blockchain Explorer](http://explorer.euno.network/)
 
 *note: If you would like your instance mentioned here contact me*
 
@@ -27,7 +28,7 @@ Create databse:
 
 Create user with read/write access:
 
-    > db.createUser( { user: "iquidus", pwd: "3xp!0reR", roles: [ "readWrite" ] } )
+    > db.createUser( { user: "your_username", pwd: "your_password", roles: [ "readWrite" ] } )
 
 *note: If you're using mongo shell 2.4.x, use the following to create your user:
 
@@ -40,6 +41,10 @@ Create user with read/write access:
 ### Install node modules
 
     cd explorer && npm install --production
+
+If you are getting kerberos compiling errors ubuntu, please try the follow command and then run the npm install command again:
+
+    sudo apt-get install libkrb5-dev
 
 ### Configure
 
