@@ -1,4 +1,4 @@
-Iquidus Explorer - 1.6.1 + EUNO
+Iquidus Explorer - 1.7.0 + EUNO
 ================
 
 An open source block explorer written in node.js.
