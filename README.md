@@ -67,6 +67,10 @@ As of version 1.4.0 the explorer defaults to cluster mode, forking an instance o
 To stop the cluster you can use
 
     npm stop
+    
+Start explorer with PM2
+
+    pm2 start pm2.config.js
 
 ### Syncing databases with the blockchain
 
