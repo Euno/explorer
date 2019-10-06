@@ -70,7 +70,7 @@ To stop the cluster you can use
     
 Start explorer with PM2
 
-    pm2 start pm2.config.js
+    pm2 start npm -- start --name euno_block_explorer
 
 ### Syncing databases with the blockchain
 
