@@ -42,7 +42,7 @@ Create user with read/write access:
 
     cd explorer && npm install --production
 
-If you are getting kerberos compiling errors ubuntu, please try the follow command and then run the npm install command again:
+If you are getting kerberos compiling errors on ubuntu, please try the follow command and then run the npm install command again:
 
     sudo apt-get install libkrb5-dev
 
