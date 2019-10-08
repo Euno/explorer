@@ -13,18 +13,13 @@ block content
         ajax: {
           url: '/api/getmasternodes',
           dataSrc: function ( json ) {
-            var masternodes = [];
-
-            Object.keys(json).forEach(function(e) {
-              masternodes.push({'address': e, 'pubkey': json[e]});
-            });
-
-            return masternodes;
+            return json;
           }
         },
         columns: [
-          { data: 'address', width: '45%' },
-          { data: 'pubkey', width: '45%' }
+          { data: 'ip_address', width: '33.3%' },
+          { data: 'address', width: '33.3%' },
+          { data: 'protocol', width: '33.3%' },
         ]
       });
     });
@@ -37,4 +32,5 @@ block content
           tr
             th.text-center #{settings.locale.net_address}
             th.text-center #{settings.locale.mn_pubkey}
+            th.text-center Wallet protocol
         tbody.text-center
