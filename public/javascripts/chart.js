@@ -1427,8 +1427,16 @@ try{
 	function getCoinmarketCap() {
 		try{
 			if ((typeof $("#lastPrice").text() !== 'undefined') && parseFloat($("#lastPrice").text()) == 0.00) {
-				$.get("https://api.coinmarketcap.com/v1/ticker/EUNO/?convert=USD", function(data) {
-					$("#lastPrice").text(data[0].price_btc);
+				$.ajax({
+					type: "GET",
+					url: "https://min-api.cryptocompare.com/data/price?fsym=EUNO&tsyms=BTC",
+					headers: {
+						'authorization' : 'Apikey f976a6c37bcb67476bf23b3d4779c55f18c5f4b90bd99bb97d212f6ab41b58ec',
+					},
+					dataType: 'JSON',
+					success: function(data){
+						$("#lastPrice").text(parseFloat(data.BTC).toFixed(8));
+					}
 				});
 			}
 		} catch (e) {
@@ -1445,10 +1453,10 @@ try{
 				}
 			}, 100);
 
-			//Call it all 10 seconds
+			//Call it every 5 minutes
 			setInterval(function() {
 				getCoinmarketCap();
-			}, 10000);
+			}, 300000);
 
 		} catch (e) {
 			console.log(e);
