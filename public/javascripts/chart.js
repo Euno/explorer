@@ -1423,37 +1423,27 @@ window.Chart = function(context){
 	  };
 }
 
-try{
+$(document).ready(function() {
 	function getCoinmarketCap() {
-		try{
-			if ((typeof $("#lastPrice").text() !== 'undefined') && parseFloat($("#lastPrice").text()) == 0.00) {
-				$.get("https://api.coinmarketcap.com/v1/ticker/EUNO/?convert=USD", function(data) {
-					$("#lastPrice").text(data[0].price_btc);
-				});
+		$.ajax({
+			type: "GET",
+			url: "https://min-api.cryptocompare.com/data/price?fsym=EUNO&tsyms=BTC",
+			headers: {
+				'authorization' : 'Apikey f976a6c37bcb67476bf23b3d4779c55f18c5f4b90bd99bb97d212f6ab41b58ec',
+			},
+			dataType: 'JSON',
+			success: function(data){
+				setTimeout(function(){
+					$("#lastPrice").text(parseFloat(data.BTC).toFixed(8));
+				}, 2000)
 			}
-		} catch (e) {
-			console.log(e);
-		}
+		});
 	}
-	$(document).ready(function() {
-		try {
-			//On the first time I need to Check if the component is loaded
-			var firtTimeTimmer = setInterval(function() {
-				if ((typeof $("#lastPrice").text() !== 'undefined') && parseFloat($("#lastPrice").text()) == 0.00) {
-					getCoinmarketCap();
-					clearInterval(firtTimeTimmer);
-				}
-			}, 100);
 
-			//Call it all 10 seconds
-			setInterval(function() {
-				getCoinmarketCap();
-			}, 10000);
+	//Call it every 5 minutes
+	setInterval(function() {
+		getCoinmarketCap();
+	}, 300000);
 
-		} catch (e) {
-			console.log(e);
-		}
-	});
-} catch (e) {
-			console.log(e);
-		}
+	getCoinmarketCap();
+});

@@ -1,4 +1,4 @@
-Iquidus Explorer - 1.6.1 + EUNO
+Iquidus Explorer - 1.7.0 + EUNO
 ================
 
 An open source block explorer written in node.js.
@@ -42,7 +42,7 @@ Create user with read/write access:
 
     cd explorer && npm install --production
 
-If you are getting kerberos compiling errors ubuntu, please try the follow command and then run the npm install command again:
+If you are getting kerberos compiling errors on ubuntu, please try the follow command and then run the npm install command again:
 
     sudo apt-get install libkrb5-dev
 
@@ -67,6 +67,10 @@ As of version 1.4.0 the explorer defaults to cluster mode, forking an instance o
 To stop the cluster you can use
 
     npm stop
+    
+Start explorer with PM2
+
+    pm2 start npm -- start --name euno_block_explorer
 
 ### Syncing databases with the blockchain
 

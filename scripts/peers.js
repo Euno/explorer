@@ -32,10 +32,10 @@ mongoose.connect(dbString, function(err) {
             // peer already exists
             loop.next();
           } else {
-            request({uri: 'https://geoip.nekudo.com/api/' + address, json: true}, function (error, response, geo) {
-              var geolocation = geo.country.name;
-              if (geo.city != false) {
-                geolocation = geo.city + ", " + geo.country.name;
+            request({uri: 'https://geoip-db.com/json/f9f80d00-d968-11e9-8a19-a311740b6a12/' + address, json: true}, function (error, response, geo) {
+              var geolocation = geo.country_name;
+              if (geo.city != false && geo.city != null) {
+                geolocation = geo.city + ", " + geo.country_name;
               }
               db.create_peer({
                 address: address,

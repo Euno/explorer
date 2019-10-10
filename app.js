@@ -43,7 +43,8 @@ var express = require('express'),
   locale = require('./lib/locale'),
   mn = require('./lib/masternode'),
   request = require('request'),
-  RpcClient = require('node-json-rpc2').Client;
+  RpcClient = require('node-json-rpc2').Client,
+  _ = require('lodash');
 
 var app = express();
 
@@ -96,14 +97,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.use('/api/getmasternodes', function(req, res) {
   var mn = function(mnp) {
-    client.call({method: 'masternode', params: mnp}, function(ierr, ires) {
+    client.call({method: 'masternode', params: mnp}, function(ierr, mnPubkey) {
       if (ierr) {
         console.log(ierr);
         return;
       }
-      res.send(ires.result);
+
+        client.call({method: 'masternode', params: ['list', 'protocol']}, function(ierrp, mnProtocol) {
+            if (ierrp) {
+                console.log(ierrp);
+                return;
+            }
+
+            var list = [];
+            _.each(mnPubkey.result, function(address, ip){
+                list.push({
+                    ip_address: ip,
+                    address: address,
+                    protocol: mnProtocol.result[ip]
+                });
+            });
+
+            res.send(list);
+        });
     });
-  }
+  };
+  
   mn(['list', 'pubkey'])
 });
 
