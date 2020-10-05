@@ -96,8 +96,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.use('/api/getmasternodes', function(req, res) {
-  var mn = function(mnp) {
-    client.call({method: 'masternode', params: mnp}, function(ierr, mnPubkey) {
+  var mn = function() {
+    /*client.call({method: 'masternode', params: mnp}, function(ierr, mnPubkey) {
       if (ierr) {
         console.log(ierr);
         return;
@@ -120,10 +120,21 @@ app.use('/api/getmasternodes', function(req, res) {
 
             res.send(list);
         });
+    });*/
+	
+	client.call({method: 'listmasternodes'}, function(ierr, mnPubkey) {
+      if (ierr) {
+        console.log(ierr);
+        return;
+      }
+
+      res.send(mnPubkey);
     });
+	
   };
   
-  mn(['list', 'pubkey'])
+  //mn(['list', 'pubkey'])
+  mn()
 });
 
 app.use('/api', bitcoinapi.app);
