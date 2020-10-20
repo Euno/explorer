@@ -13,13 +13,13 @@ block content
         ajax: {
           url: '/api/getmasternodes',
           dataSrc: function ( json ) {
-            return json;
+            return json.result;
           }
         },
         columns: [
-          { data: 'ip_address', width: '33.3%' },
-          { data: 'address', width: '33.3%' },
-          { data: 'protocol', width: '33.3%' },
+          { data: 'addr', width: '33.3%' },
+          { data: 'version', width: '33.3%' },
+          { data: 'status', width: '33.3%' },
         ]
       });
     });
@@ -30,7 +30,7 @@ block content
       table#masternodes-table.table.table-bordered.table-striped
         thead
           tr
-            th.text-center #{settings.locale.net_address}
-            th.text-center #{settings.locale.mn_pubkey}
-            th.text-center Wallet protocol
+            th.text-center Masternode address
+            th.text-center Version
+            th.text-center Status
         tbody.text-center
