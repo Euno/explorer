@@ -214,7 +214,7 @@ app.use('/ext/totalsupply', function(req, res) {
 });
 
 app.use('/ext/getmaxsupply', function(req, res) {
-    res.send('8000000000');
+    res.send('50000000');
 });
 
 // locals
