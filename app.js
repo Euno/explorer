@@ -201,6 +201,22 @@ app.use('/ext/ismasternodeopen/:host/:port', function(req, res) {
   });
 });
 
+app.use('/ext/getcirculatingsupply', function(req, res) {
+    lib.get_supply(function(supply){
+        res.send(' '+supply);
+    });
+});
+
+app.use('/ext/totalsupply', function(req, res) {
+    lib.get_supply(function(supply){
+        res.send(' '+supply);
+    });
+});
+
+app.use('/ext/getmaxsupply', function(req, res) {
+    res.send('8000000000');
+});
+
 // locals
 app.set('title', settings.title);
 app.set('symbol', settings.symbol);

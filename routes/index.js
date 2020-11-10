@@ -322,9 +322,4 @@ router.get('/ext/summary', function(req, res) {
   });
 });
 
-router.get('/ext/totalsupply', function(req, res) {
-    db.get_stats(settings.coin, function (stats) {
-      res.send(''+stats.supply+'');
-    });
-});
 module.exports = router;
